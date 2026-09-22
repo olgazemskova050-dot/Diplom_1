@@ -1,35 +1,9 @@
 import pytest
 from unittest.mock import Mock
 
-from praktikum.burger import Burger
-
 
 class TestBurger:
     """Тесты для класса Burger."""
-
-    @pytest.fixture
-    def burger(self):
-        """Фикстура: новый бургер перед каждым тестом."""
-        return Burger()
-
-    @pytest.fixture
-    def mock_bun(self):
-        """Фикстура: мок булочки."""
-        bun = Mock()
-        bun.get_name.return_value = "black bun"
-        bun.get_price.return_value = 100.0
-        return bun
-
-    @pytest.fixture
-    def mock_ingredient(self):
-        """Фикстура: фабрика моков ингредиентов."""
-        def _make(name="cutlet", price=200.0, ing_type="FILLING"):
-            ing = Mock()
-            ing.get_name.return_value = name
-            ing.get_price.return_value = price
-            ing.get_type.return_value = ing_type
-            return ing
-        return _make
 
     def test_init_default_state(self, burger):
         """При создании бургер пустой: нет булочки и ингредиентов."""

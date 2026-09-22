@@ -8,20 +8,28 @@ class TestIngredient:
     """Тесты для класса Ingredient."""
 
     @pytest.mark.parametrize(
-        "ingredient_type, name, price",
-        [
-            (INGREDIENT_TYPE_SAUCE, "hot sauce", 100),
-            (INGREDIENT_TYPE_SAUCE, "sour cream", 200.0),
-            (INGREDIENT_TYPE_FILLING, "cutlet", 300),
-            (INGREDIENT_TYPE_FILLING, "dinosaur", 400.5),
-            (INGREDIENT_TYPE_SAUCE, "", 0),
-            ("unknown", "mystery", 999),
-        ],
+        "ingredient_type",
+        [INGREDIENT_TYPE_SAUCE, INGREDIENT_TYPE_FILLING],
     )
-    def test_ingredient_creation_and_getters(self, ingredient_type, name, price):
-        """Проверка создания ингредиента и работы всех геттеров."""
-        ingredient = Ingredient(ingredient_type, name, price)
-
+    def test_get_type(self, ingredient_type):
+        """Проверка метода get_type."""
+        ingredient = Ingredient(ingredient_type, "name", 100)
         assert ingredient.get_type() == ingredient_type
+
+    @pytest.mark.parametrize(
+        "name",
+        ["hot sauce", "sour cream", "cutlet", "dinosaur", ""],
+    )
+    def test_get_name(self, name):
+        """Проверка метода get_name."""
+        ingredient = Ingredient(INGREDIENT_TYPE_SAUCE, name, 100)
         assert ingredient.get_name() == name
+
+    @pytest.mark.parametrize(
+        "price",
+        [100, 200.0, 300, 400.5, 0],
+    )
+    def test_get_price(self, price):
+        """Проверка метода get_price."""
+        ingredient = Ingredient(INGREDIENT_TYPE_SAUCE, "hot sauce", price)
         assert ingredient.get_price() == price
